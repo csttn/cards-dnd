@@ -1,0 +1,48 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  margin-right: 40px;
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 304px;
+  height: 90px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 2px 2px 6px #00000029;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.cardContentHidden p {
+  color: #a7a8ac;
+}
+
+.cardContent p {
+  font-weight: bold;
+  margin: 0;
+}
+
+.cardButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  background: #e1173f;
+  border-radius: 50%;
+  border: none;
+  color: white;
+}
+
+.cardButtonHidden {
+  color: #04e762;
+  background-color: #ffffff;
+  border: 1px solid #04e762;
+}

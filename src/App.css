@@ -1,0 +1,12 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
