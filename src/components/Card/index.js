@@ -12,10 +12,10 @@ export default function Card({ provided, isHidden, name, id, onChangeHidden }) {
 
   return (
     <div className='card' {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
-      <button className={`cardButton ${hidden ? '' : 'cardButtonHidden'}`} onClick={toggleHidden}>
-        {hidden ? '-' : '+'}
+      <button className={`cardButton ${hidden ? 'cardButtonHidden' : ''}`} onClick={toggleHidden}>
+        {hidden ? '+' : '-'}
       </button>
-      <div className={`cardContent ${hidden ? '' : 'cardContentHidden'}`}>
+      <div className={`cardContent ${hidden ? 'cardContentHidden' : ''}`}>
         <p>{name}</p>
       </div>
     </div>
