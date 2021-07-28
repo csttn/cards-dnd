@@ -21,8 +21,8 @@ const cardListDefault = [
 export function useCardList() {
   const [cardList, setCardList] = useState([]);
 
-  //  função resposável por retornar o valor inicial da lista ao usuario
-  //  seja lista salva no localStorage ou não
+  //  função resposável por retornar o valor inicial da lista
+  //  seja lista salva no localStorage ou lista padrão.
   useEffect(() => {
     function setDefaultValue() {
       const cardLisCustom = loadCardList();
@@ -56,7 +56,6 @@ export function useCardList() {
     const [reorderdItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderdItem);
 
-    setCardList(items);
     saveCardList(items);
   }
 
@@ -65,6 +64,7 @@ export function useCardList() {
     const cardUpdate = cardList;
     const indexItem = cardList.findIndex((card) => card.cardNumber === cardNumber);
     cardUpdate[indexItem].isHidden = !cardUpdate[indexItem].isHidden;
+
     saveCardList(cardUpdate);
   }
 

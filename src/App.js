@@ -10,7 +10,7 @@ import { useCardList } from './components/Hooks/useListCards';
 
 function App() {
   // usando estados e função do Hook
-  const { cardList, handleOnDragEnd, setDefaultList } = useCardList();
+  const { cardList, handleOnDragEnd, setDefaultList, toggleCardVisibility } = useCardList();
 
   return (
     <div className='App'>
@@ -33,6 +33,7 @@ function App() {
                         cardNumber={cardNumber}
                         name={name}
                         isHidden={isHidden}
+                        toggleHidden={toggleCardVisibility}
                       />
                     )}
                   </Draggable>

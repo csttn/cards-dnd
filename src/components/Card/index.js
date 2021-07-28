@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 
 import './styles.css';
 
-import { useCardList } from '../Hooks/useListCards';
+export default function Card({ providedDnd, isHidden, name, cardNumber, toggleHidden }) {
+  const [hidden, setHiden] = useState(isHidden);
 
-export default function Card({ providedDnd, isHidden, name, cardNumber }) {
-  const { toggleCardVisibility } = useCardList();
-
-  console.log(cardNumber);
-  const [hidden, updateHidden] = useState(isHidden);
-
-  function toggleHidden() {
-    updateHidden(!hidden);
-    toggleCardVisibility(cardNumber);
+  function toggleStateHidden() {
+    setHiden((prevHidden) => !prevHidden);
+    toggleHidden(cardNumber);
   }
 
   return (
@@ -22,7 +17,10 @@ export default function Card({ providedDnd, isHidden, name, cardNumber }) {
       ref={providedDnd.innerRef}
       {...providedDnd.dragHandleProps}
     >
-      <button className={`cardButton ${hidden ? 'cardButtonHidden' : ''}`} onClick={toggleHidden}>
+      <button
+        className={`cardButton ${hidden ? 'cardButtonHidden' : ''}`}
+        onClick={toggleStateHidden}
+      >
         {hidden ? '+' : '-'}
       </button>
       <div className={`cardContent ${hidden ? 'cardContentHidden' : ''}`}>
