@@ -1,35 +1,34 @@
-import React, { useContext, useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 
-const cardsDefault = [
+const cardListDefault = [
   {
     id: '1',
     name: 'card1',
+    number: '1234',
     isHidden: true,
   },
   {
     id: '2',
     name: 'card2',
+    number: '4567',
     isHidden: false,
   },
   {
     id: '3',
     name: 'card3',
+    number: '8910',
     isHidden: false,
   },
 ];
 
-const CardListContext = createContext({});
-
-export function CardListProvider({ children }) {
-  const [cardListDefault, setCardListDefault] = useState(cardsDefault);
-  //    lista aser manipulada
+export function useCardList() {
   const [cardList, setCardList] = useState([]);
 
   //  função resposável por retornar o valor inicial da lista ao usuario
   //  seja lista salva no localStorage ou não
   useEffect(() => {
     function setDefaultValue() {
-      const cardLisCustom = loadCardListCustom();
+      const cardLisCustom = loadCardList();
       if (cardLisCustom) {
         setCardList(cardLisCustom);
       } else {
@@ -40,27 +39,52 @@ export function CardListProvider({ children }) {
   }, []);
 
   //  função responsável por buscar lista armazenada no localStorage
-  function loadCardListCustom() {
+  function loadCardList() {
     const cardList = localStorage.getItem('@idUserCardList');
     return JSON.parse(cardList);
   }
 
   //  função responsável por atualizar lista no localStorage
-  function handleCardListCustom(updateCardList) {
+  function saveCardList(updateCardList) {
     setCardList(updateCardList);
     localStorage.setItem('@idUserCardList', JSON.stringify(updateCardList));
   }
 
-  return (
-    <CardListContext.Provider value={{ cardList, cardListDefault, handleCardListCustom }}>
-      {children}
-    </CardListContext.Provider>
-  );
-}
+  // função responsável por salvar atualizações da lista
+  function handleOnDragEnd(result) {
+    if (result.destination === null) {
+      return;
+    }
+    const items = Array.from(cardList);
+    const [reorderdItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderdItem);
 
-//  função responsavel por retornar toda a lógica armazenada no contexto
-export function useCardList() {
-  const context = useContext(CardListContext);
+    setCardList(items);
+    saveCardList(items);
+  }
 
-  return context;
+  //  função que atualiza a visibilidade dos cartoes
+  function changeCardVisibility(id) {
+    const cardUpdate = cardList;
+    const indexItem = cardList.findIndex((card) => card.id === id);
+    cardUpdate[indexItem].isHidden = !cardUpdate[indexItem].isHidden;
+    saveCardList(cardUpdate);
+  }
+
+  //  redefinição de lista para padrão
+  function setDefaultList() {
+    setCardList(cardListDefault);
+    //  salvando ação do usuario ao setar valor padrão da lista no localStorage
+    saveCardList(cardListDefault);
+    window.location.reload();
+  }
+
+  return {
+    cardList,
+    cardListDefault,
+    saveCardList,
+    handleOnDragEnd,
+    changeCardVisibility,
+    setDefaultList,
+  };
 }
