@@ -64,7 +64,7 @@ export function useCardList() {
   }
 
   //  função que atualiza a visibilidade dos cartoes
-  function changeCardVisibility(id) {
+  function toggleCardVisibility(id) {
     const cardUpdate = cardList;
     const indexItem = cardList.findIndex((card) => card.id === id);
     cardUpdate[indexItem].isHidden = !cardUpdate[indexItem].isHidden;
@@ -84,7 +84,7 @@ export function useCardList() {
     cardListDefault,
     saveCardList,
     handleOnDragEnd,
-    changeCardVisibility,
+    toggleCardVisibility,
     setDefaultList,
   };
 }

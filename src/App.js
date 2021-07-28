@@ -10,7 +10,7 @@ import { useCardList } from './components/Hooks/useListCards';
 
 function App() {
   // usando estados e função do Hook
-  const { cardList, handleOnDragEnd, changeCardVisibility, setDefaultList } = useCardList();
+  const { cardList, handleOnDragEnd, setDefaultList } = useCardList();
 
   return (
     <div className='App'>
@@ -28,13 +28,7 @@ function App() {
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
                     {(provided) => (
-                      <Card
-                        provided={provided}
-                        id={id}
-                        name={name}
-                        isHidden={isHidden}
-                        onChangeHidden={changeCardVisibility}
-                      />
+                      <Card providedDnd={provided} id={id} name={name} isHidden={isHidden} />
                     )}
                   </Draggable>
                 );
