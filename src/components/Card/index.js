@@ -4,14 +4,15 @@ import './styles.css';
 
 import { useCardList } from '../Hooks/useListCards';
 
-export default function Card({ providedDnd, isHidden, name, id }) {
+export default function Card({ providedDnd, isHidden, name, cardNumber }) {
   const { toggleCardVisibility } = useCardList();
 
+  console.log(cardNumber);
   const [hidden, updateHidden] = useState(isHidden);
 
   function toggleHidden() {
     updateHidden(!hidden);
-    toggleCardVisibility(id);
+    toggleCardVisibility(cardNumber);
   }
 
   return (

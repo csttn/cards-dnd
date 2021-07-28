@@ -2,21 +2,18 @@ import { useState, useEffect } from 'react';
 
 const cardListDefault = [
   {
-    id: '1',
     name: 'card1',
-    number: '1234',
+    cardNumber: '1234',
     isHidden: true,
   },
   {
-    id: '2',
     name: 'card2',
-    number: '4567',
+    cardNumber: '4567',
     isHidden: false,
   },
   {
-    id: '3',
     name: 'card3',
-    number: '8910',
+    cardNumber: '8910',
     isHidden: false,
   },
 ];
@@ -64,9 +61,9 @@ export function useCardList() {
   }
 
   //  função que atualiza a visibilidade dos cartoes
-  function toggleCardVisibility(id) {
+  function toggleCardVisibility(cardNumber) {
     const cardUpdate = cardList;
-    const indexItem = cardList.findIndex((card) => card.id === id);
+    const indexItem = cardList.findIndex((card) => card.cardNumber === cardNumber);
     cardUpdate[indexItem].isHidden = !cardUpdate[indexItem].isHidden;
     saveCardList(cardUpdate);
   }

@@ -24,11 +24,16 @@ function App() {
         <Droppable droppableId='card'>
           {(provided) => (
             <ul className='cardList' {...provided.droppableProps} ref={provided.innerRef}>
-              {cardList.map(({ id, name, isHidden }, index) => {
+              {cardList.map(({ cardNumber, name, isHidden }, index) => {
                 return (
-                  <Draggable key={id} draggableId={id} index={index}>
+                  <Draggable key={cardNumber} draggableId={cardNumber} index={index}>
                     {(provided) => (
-                      <Card providedDnd={provided} id={id} name={name} isHidden={isHidden} />
+                      <Card
+                        providedDnd={provided}
+                        cardNumber={cardNumber}
+                        name={name}
+                        isHidden={isHidden}
+                      />
                     )}
                   </Draggable>
                 );
