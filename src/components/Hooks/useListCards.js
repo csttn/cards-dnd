@@ -11,11 +11,6 @@ const cardListDefault = [
     cardNumber: '4567',
     isHidden: false,
   },
-  {
-    name: 'card3',
-    cardNumber: '8910',
-    isHidden: false,
-  },
 ];
 
 export function useCardList() {
@@ -46,6 +41,12 @@ export function useCardList() {
     setCardList(updateCardList);
     localStorage.setItem('@idUserCardList', JSON.stringify(updateCardList));
   }
+
+  const loopMoveCard = () => {
+    const newCardList = [...cardList];
+    newCardList.reverse();
+    setCardList(newCardList);
+  };
 
   // função responsável por salvar atualizações da lista
   function handleOnDragEnd(result) {
@@ -83,5 +84,6 @@ export function useCardList() {
     handleOnDragEnd,
     toggleCardVisibility,
     setDefaultList,
+    loopMoveCard,
   };
 }

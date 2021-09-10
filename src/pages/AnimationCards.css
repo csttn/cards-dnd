@@ -1,0 +1,51 @@
+.cardTransitionTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  margin-right: 40px;
+  animation: animationTop;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.cardTransitionBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  margin-right: 40px;
+}
+.slideDownAndUpLoop {
+  animation: slideDownAndUp;
+  animation-iteration-count: infinite;
+}
+
+@keyframes slideUpAndDown {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.slideUpAndDownLoop {
+  animation: slideUpAndDown;
+  animation-iteration-count: infinite;
+}
+
+@keyframes slideDownAndUp {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

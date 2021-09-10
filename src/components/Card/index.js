@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 
 import './styles.css';
 
-export default function Card({ providedDnd, isHidden, name, cardNumber, toggleHidden }) {
+export default function Card({
+  providedDnd,
+  isHidden,
+  name,
+  cardNumber,
+  toggleHidden,
+  className = 'card',
+}) {
   const [hidden, setHiden] = useState(isHidden);
 
   function toggleStateHidden() {
@@ -12,10 +19,10 @@ export default function Card({ providedDnd, isHidden, name, cardNumber, toggleHi
 
   return (
     <div
-      className='card'
-      {...providedDnd.draggableProps}
-      ref={providedDnd.innerRef}
-      {...providedDnd.dragHandleProps}
+      className={`${className}`}
+      // {...providedDnd.draggableProps}
+      // ref={providedDnd.innerRef}
+      // {...providedDnd.dragHandleProps}
     >
       <button
         className={`cardButton ${hidden ? 'cardButtonHidden' : ''}`}
