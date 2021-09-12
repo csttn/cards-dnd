@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 
 const cardListDefault = [
   {
@@ -13,7 +14,9 @@ const cardListDefault = [
   },
 ];
 
-export function useCardList() {
+const CardsContext = createContext({});
+
+export function UseCardListProvider({ children }) {
   const [cardList, setCardList] = useState([]);
 
   //  função resposável por retornar o valor inicial da lista
@@ -39,14 +42,9 @@ export function useCardList() {
   //  função responsável por atualizar lista no localStorage
   function saveCardList(updateCardList) {
     setCardList(updateCardList);
+    console.log(updateCardList);
     localStorage.setItem('@idUserCardList', JSON.stringify(updateCardList));
   }
-
-  const loopMoveCard = () => {
-    const newCardList = [...cardList];
-    newCardList.reverse();
-    setCardList(newCardList);
-  };
 
   // função responsável por salvar atualizações da lista
   function handleOnDragEnd(result) {
@@ -77,13 +75,26 @@ export function useCardList() {
     window.location.reload();
   }
 
-  return {
-    cardList,
-    cardListDefault,
-    saveCardList,
-    handleOnDragEnd,
-    toggleCardVisibility,
-    setDefaultList,
-    loopMoveCard,
-  };
+  return (
+    <CardsContext.Provider
+      value={{
+        cardList,
+        cardListDefault,
+        saveCardList,
+        handleOnDragEnd,
+        toggleCardVisibility,
+        setDefaultList,
+      }}
+    >
+      {children}
+    </CardsContext.Provider>
+  );
+}
+
+export function useCardList() {
+  const context = useContext(CardsContext);
+  if (!context) {
+    throw new Error('useCardList must be used within a CardListProvider');
+  }
+  return context;
 }

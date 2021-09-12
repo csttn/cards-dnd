@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import Header from './components/Header';
@@ -7,6 +7,7 @@ import Card from './components/Card';
 import './App.css';
 
 import { useCardList } from './components/Hooks/useListCards';
+import AnimationCards from './pages/AnimationCards';
 
 function App() {
   // usando estados e função do Hook
@@ -28,13 +29,19 @@ function App() {
                 return (
                   <Draggable key={cardNumber} draggableId={cardNumber} index={index}>
                     {(provided) => (
-                      <Card
-                        providedDnd={provided}
-                        cardNumber={cardNumber}
-                        name={name}
-                        isHidden={isHidden}
-                        toggleHidden={toggleCardVisibility}
-                      />
+                      <div
+                        {...provided.draggableProps}
+                        ref={provided.innerRef}
+                        {...provided.dragHandleProps}
+                      >
+                        <Card
+                          providedDnd={provided}
+                          cardNumber={cardNumber}
+                          name={name}
+                          isHidden={isHidden}
+                          toggleHidden={toggleCardVisibility}
+                        />
+                      </div>
                     )}
                   </Draggable>
                 );
@@ -44,6 +51,7 @@ function App() {
           )}
         </Droppable>
       </DragDropContext>
+      <AnimationCards />
     </div>
   );
 }

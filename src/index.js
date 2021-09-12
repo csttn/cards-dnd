@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import AnimationaCards from './pages/AnimationCards';
+import { UseCardListProvider } from './components/Hooks/useListCards';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AnimationaCards />
+    <UseCardListProvider>
+      <App />
+    </UseCardListProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
