@@ -35,7 +35,6 @@ function App() {
                         {...provided.dragHandleProps}
                       >
                         <Card
-                          providedDnd={provided}
                           cardNumber={cardNumber}
                           name={name}
                           isHidden={isHidden}
